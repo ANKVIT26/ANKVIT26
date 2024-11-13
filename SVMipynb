@@ -1,0 +1,180 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPE88aA6kX8/OTX6kJ/wlgj",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/ANKVIT26/ANKVIT26/blob/main/SVMipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "22BCE9038     ANKIT KUMAR      08/11/2024"
+      ],
+      "metadata": {
+        "id": "-dDGMcj1OxTA"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Import necessary libraries\n",
+        "import pandas as pd\n",
+        "import numpy as np\n",
+        "from sklearn.feature_extraction.text import TfidfVectorizer\n",
+        "from sklearn.model_selection import train_test_split\n",
+        "from sklearn.svm import SVC\n",
+        "from sklearn.metrics import classification_report, accuracy_score\n",
+        "import json\n",
+        "\n",
+        "# Load the dataset\n",
+        "data = []\n",
+        "file_path = '/content/News_Category_Dataset_v3.json'\n",
+        "\n",
+        "try:\n",
+        "    with open(file_path, 'r') as file:\n",
+        "        for line in file:\n",
+        "            try:\n",
+        "                data.append(json.loads(line))\n",
+        "            except json.JSONDecodeError as e:\n",
+        "                print(f\"Skipping invalid JSON line: {e}\")\n",
+        "except FileNotFoundError:\n",
+        "    print(f\"File not found: {file_path}\")\n",
+        "    raise\n",
+        "\n",
+        "# Convert valid data to a DataFrame\n",
+        "data = pd.DataFrame(data)\n",
+        "\n",
+        "# Check if required columns exist\n",
+        "if 'headline' not in data.columns or 'category' not in data.columns:\n",
+        "    raise ValueError(\"The required columns 'headline' or 'category' are missing from the dataset.\")\n",
+        "\n",
+        "# Preprocess the text data using TF-IDF Vectorization\n",
+        "vectorizer = TfidfVectorizer(stop_words='english', max_features=1000)\n",
+        "X = vectorizer.fit_transform(data['headline'])\n",
+        "y = data['category']\n",
+        "\n",
+        "# Split the dataset into training and testing sets (80% train, 20% test)\n",
+        "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n",
+        "\n",
+        "# Train the SVM classifier with a linear kernel\n",
+        "svm = SVC(kernel='linear', C=1, random_state=42)\n",
+        "svm.fit(X_train, y_train)\n",
+        "\n",
+        "# Evaluate the classifier on the test set\n",
+        "y_pred = svm.predict(X_test)\n",
+        "print(\"Accuracy:\", accuracy_score(y_test, y_pred))\n",
+        "print(\"Classification Report:\\n\", classification_report(y_test, y_pred))\n",
+        "\n",
+        "# Categorize new articles\n",
+        "new_articles = [\n",
+        "    \"The stock market is experiencing a significant rise.\",\n",
+        "    \"The football team won the championship.\"\n",
+        "]\n",
+        "new_X = vectorizer.transform(new_articles)\n",
+        "predictions = svm.predict(new_X)\n",
+        "\n",
+        "print(\"Predictions for new articles:\")\n",
+        "for article, prediction in zip(new_articles, predictions):\n",
+        "    print(f\"Article: '{article}' -> Predicted Category: '{prediction}'\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "YEPNaE2KO2VY",
+        "outputId": "d505e8b4-257c-4240-b3ca-0cf419b4852a"
+      },
+      "execution_count": 1,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Skipping invalid JSON line: Unterminated string starting at: line 1 column 161 (char 160)\n",
+            "Accuracy: 0.5673773987206823\n",
+            "Classification Report:\n",
+            "                 precision    recall  f1-score   support\n",
+            "\n",
+            "ARTS & CULTURE       0.00      0.00      0.00        12\n",
+            "  BLACK VOICES       0.52      0.33      0.40       130\n",
+            "      BUSINESS       0.00      0.00      0.00        37\n",
+            "        COMEDY       0.69      0.60      0.64       187\n",
+            "         CRIME       0.39      0.28      0.32        80\n",
+            "CULTURE & ARTS       0.00      0.00      0.00        13\n",
+            "     EDUCATION       0.00      0.00      0.00        15\n",
+            " ENTERTAINMENT       0.43      0.74      0.54       750\n",
+            "   ENVIRONMENT       0.00      0.00      0.00        29\n",
+            "  FOOD & DRINK       0.30      0.11      0.16        28\n",
+            "         GREEN       0.00      0.00      0.00        36\n",
+            "HEALTHY LIVING       0.25      0.07      0.11        56\n",
+            " HOME & LIVING       0.67      0.22      0.33        18\n",
+            "        IMPACT       0.00      0.00      0.00        43\n",
+            " LATINO VOICES       0.60      0.09      0.16        33\n",
+            "         MEDIA       0.43      0.16      0.24        97\n",
+            "         MONEY       0.00      0.00      0.00         8\n",
+            "     PARENTING       0.62      0.19      0.29        26\n",
+            "       PARENTS       0.36      0.19      0.25        48\n",
+            "      POLITICS       0.66      0.86      0.75      1601\n",
+            "  QUEER VOICES       0.74      0.48      0.58       170\n",
+            "      RELIGION       0.33      0.04      0.06        28\n",
+            "       SCIENCE       0.56      0.31      0.40        16\n",
+            "        SPORTS       0.66      0.46      0.54       132\n",
+            "         STYLE       0.25      0.03      0.05        36\n",
+            "STYLE & BEAUTY       0.64      0.35      0.45        40\n",
+            "         TASTE       0.11      0.05      0.07        21\n",
+            "          TECH       0.17      0.06      0.09        17\n",
+            " THE WORLDPOST       0.00      0.00      0.00         1\n",
+            "        TRAVEL       0.62      0.19      0.29        27\n",
+            "     U.S. NEWS       0.38      0.26      0.31       278\n",
+            "      WEDDINGS       0.00      0.00      0.00         1\n",
+            "    WEIRD NEWS       0.22      0.05      0.08       105\n",
+            "      WELLNESS       0.00      0.00      0.00        32\n",
+            "         WOMEN       0.60      0.25      0.35       109\n",
+            "    WORLD NEWS       0.62      0.53      0.57       430\n",
+            "\n",
+            "      accuracy                           0.57      4690\n",
+            "     macro avg       0.33      0.19      0.22      4690\n",
+            "  weighted avg       0.53      0.57      0.52      4690\n",
+            "\n",
+            "Predictions for new articles:\n",
+            "Article: 'The stock market is experiencing a significant rise.' -> Predicted Category: 'ENTERTAINMENT'\n",
+            "Article: 'The football team won the championship.' -> Predicted Category: 'SPORTS'\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "/usr/local/lib/python3.10/dist-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.\n",
+            "  _warn_prf(average, modifier, f\"{metric.capitalize()} is\", len(result))\n",
+            "/usr/local/lib/python3.10/dist-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.\n",
+            "  _warn_prf(average, modifier, f\"{metric.capitalize()} is\", len(result))\n",
+            "/usr/local/lib/python3.10/dist-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.\n",
+            "  _warn_prf(average, modifier, f\"{metric.capitalize()} is\", len(result))\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
