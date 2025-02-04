@@ -2,7 +2,7 @@
 - 👀 Interested in Software Engineering, Machine Learning, and creative adaptive solutions
 - 🌱 Currently pursuing Computer Science Engineering from VIT-AP
 - 💞️ Looking to collaborate on Github and LinkedIn for projects related to my line of interest
-- 📫 How to reach me ... jeeadv2022clearho@gmail.com
+- 📫 Reach me through ... jeeadv2022clearho@gmail.com
 - 😄 Pronouns: He/Him
 - ⚡ Fun fact: Great at theoretical approach towards problems, wants your help towards implementation
 
