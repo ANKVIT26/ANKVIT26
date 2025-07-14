@@ -4,7 +4,7 @@
 - 💞️ Looking to collaborate on Github and LinkedIn for projects related to my line of interest
 - 📫 Reach me through ... jeeadv2022clearho@gmail.com
 - 😄 Pronouns: He/Him
-- ⚡ Fun fact: Great at theoretical approach towards problems, wants your help towards implementation
+- ⚡ Fun fact: Great at theoretical approach towards problems, working towards implementation of products
 
 <!---
 ANKVIT26/ANKVIT26 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
