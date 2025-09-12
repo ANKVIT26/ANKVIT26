@@ -1,6 +1,6 @@
 # Hi there, I'm Ankit Kumar! 👋
 
-🎓 **Final Year Student | Java • Node.js • JavaScript • SQL **
+🎓 ** Final Year Student | Java • Node.js • JavaScript • SQL **
   
 I’m passionate about diving deep into tech—especially the kind that seems humongous and fascinating! I love building projects, exploring their intricate depths, and making contributions to make them even better.
 
