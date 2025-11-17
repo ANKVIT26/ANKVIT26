@@ -19,6 +19,9 @@ I’m passionate about diving deep into tech—especially the kind that seems hu
 ### [KNWOUT](https://github.com/ANKVIT26/KNWOUT)
 Plan your day and stay organized! [Live Demo](https://knwout-anxl.vercel.app/)
 
+### [NODEMESH](https://github.com/ANKVIT26/nodemesh)
+ASK IT OUT [Live Demo] (https://nodemesh-ai-frontend.onrender.com/)
+
 ### Hybrid Sentiment Analysis
 A project focused on advanced sentiment analysis techniques.
 
