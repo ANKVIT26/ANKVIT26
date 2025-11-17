@@ -1,6 +1,6 @@
 # Hi there, I'm Ankit Kumar! 👋
 
-🎓 ** Final Year Student | Java • Node.js • JavaScript • SQL **
+🎓  Final Year Student | Java • Node.js • JavaScript • SQL 
   
 I’m passionate about diving deep into tech—especially the kind that seems humongous and fascinating! I love building projects, exploring their intricate depths, and making contributions to make them even better.
 
@@ -19,7 +19,7 @@ I’m passionate about diving deep into tech—especially the kind that seems hu
 ### [KNWOUT](https://github.com/ANKVIT26/KNWOUT)
 Plan your day and stay organized! [Live Demo](https://knwout-anxl.vercel.app/)
 
-### [NODEMESH](https://github.com/ANKVIT26/nodemesh)
+### [NODEMESH]((https://github.com/ANKVIT26/NodeMesh_CHATBOT))
 ASK IT OUT [Live Demo] (https://nodemesh-ai-frontend.onrender.com/)
 
 ### Hybrid Sentiment Analysis
